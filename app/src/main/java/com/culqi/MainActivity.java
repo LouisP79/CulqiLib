@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView textView = findViewById(R.id.text_view);
 
-        Card card = new Card("411111111111111","123",9,2020,"annonimo79@gmail.com");
+        Card card = new Card("4111111111111111","123",9,2020,"annonimo79@gmail.com");
 
         Token token = new Token("pk_test_Jf2vS2zIlimqIgm8");
 

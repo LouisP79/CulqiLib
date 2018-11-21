@@ -10,7 +10,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -37,15 +39,13 @@ public class Token {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        JSONObject jsonBody = new JSONObject();
+        Gson gson = new Gson();
+        JSONObject jsonBody = null;
+
         try {
-            jsonBody.put("card_number", card.getCard_number());
-            jsonBody.put("cvv", card.getCvv());
-            jsonBody.put("expiration_month", card.getExpiration_month());
-            jsonBody.put("expiration_year", card.getExpiration_year());
-            jsonBody.put("email", card.getEmail());
-        } catch (Exception ex){
-            Log.v("", "ERROR: "+ex.getMessage());
+            jsonBody = new JSONObject(gson.toJson(card));
+        } catch (JSONException e) {
+            Log.v("", "ERROR: "+e.getMessage());
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
