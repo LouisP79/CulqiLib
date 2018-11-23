@@ -64,3 +64,15 @@ token.createToken(getApplicationContext(), card, new TokenCallback() {
     }
 });
 ```
+
+#### Respuesta del método onError(VolleyError error) dentro de error.networkResponse.data
+```json
+{
+    "object": "error",
+    "type": "parameter_error",
+    "code": "invalid_number",
+    "merchant_message": "El número de la tarjeta no es un número de tarjeta de crédito o débito válido. Tiene que ser numérico de 13 a 16 digitos.",
+    "user_message": "El numero de tarjeta de crédito o débito brindado no es válido.",
+    "param": "card_number"
+}
+```
