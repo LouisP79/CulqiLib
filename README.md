@@ -65,6 +65,58 @@ token.createToken(getApplicationContext(), card, new TokenCallback() {
 });
 ```
 
+#### Respuesta del método onSuccess(JSONObject token)
+```json
+{
+    "object": "token",
+    "id": "tkn_test_6tMWw62MYHvlv3qK",
+    "type": "card",
+    "creation_date": 1542999157000,
+    "email": "annonimo79@gmail.com",
+    "card_number": "411111******1111",
+    "last_four": "1111",
+    "active": true,
+    "iin": {
+        "object": "iin",
+        "bin": "411111",
+        "card_brand": "Visa",
+        "card_type": "credito",
+        "card_category": "Clásica",
+        "issuer": {
+            "name": "BBVA",
+            "country": "PERU",
+            "country_code": "PE",
+            "website": null,
+            "phone_number": null
+        },
+        "installments_allowed": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            3,
+            5,
+            7,
+            9,
+            24,
+            48
+        ]
+    },
+    "client": {
+        "ip": "181.65.242.132",
+        "ip_country": "Perú",
+        "ip_country_code": "PE",
+        "browser": null,
+        "device_fingerprint": null,
+        "device_type": "Escritorio"
+    },
+    "metadata": {}
+}
+```
+
+
 #### Respuesta del método onError(VolleyError error) dentro de error.networkResponse.data
 ```json
 {
