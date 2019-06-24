@@ -8,6 +8,7 @@ import android.view.View
 import com.culqilib.Token
 import com.culqilib.listener.TokenCallback
 import com.culqilib.model.TokenError
+import com.culqilib.model.TokenSuccess
 import com.culqilib.restServices.deserializer.TokenDeserializer
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val token = Token("pk_test_Jf2vS2zIlimqIgm8")
         token.createToken(card, object : TokenCallback {
-            override fun onSuccess(token: com.culqilib.model.TokenSuccess) {
+            override fun onSuccess(token: TokenSuccess) {
                 textView.text = token.id
 
                 textView.visibility = View.VISIBLE
