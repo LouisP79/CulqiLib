@@ -18,7 +18,7 @@ allprojects {
 ```
 #### build.gradle (Module:app)
 ```gradle
-  implementation 'com.github.LouisP79:CulqiLib:v3.0'
+  implementation 'com.github.LouisP79:CulqiLib:v3.1'
 ```
 
 #### Uso
@@ -40,7 +40,7 @@ val card = TokenDeserializer.CardRequest(cardNumber="4111111111111111",
 
         val token = Token("pk_test_Jf2vS2zIlimqIgm8")
         token.createToken(card, object : TokenCallback {
-            override fun onSuccess(token: com.culqilib.model.Token) {
+            override fun onSuccess(token: TokenSuccess) {
                 textView.text = token.id
 
                 textView.visibility = View.VISIBLE
@@ -58,9 +58,9 @@ val card = TokenDeserializer.CardRequest(cardNumber="4111111111111111",
         })
 ```
 
-#### Respuesta del método onSuccess(token: com.culqilib.model.Token)
+#### Respuesta del método onSuccess(token: TokenSuccess)
 ```kotlin
-data class Token(val objectToken: String,
+data class TokenSuccess(val objectToken: String,
             val id: String,
             val type: String,
             val creationDate: Long,
