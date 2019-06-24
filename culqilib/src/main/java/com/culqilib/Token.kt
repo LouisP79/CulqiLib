@@ -22,7 +22,7 @@ class Token(private var apiKey: String) {
 
     fun createToken(card: TokenDeserializer.CardRequest, listener: TokenCallback){
         val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("https://api.culqi.com/")
+                .baseUrl("https://secure.culqi.com")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
 
