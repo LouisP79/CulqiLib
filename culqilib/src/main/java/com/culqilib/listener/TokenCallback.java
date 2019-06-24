@@ -1,6 +1,6 @@
-package com.culqilib;
+package com.culqilib.listener;
 
-import com.android.volley.VolleyError;
+import com.culqilib.model.Error;
 
 import org.json.JSONObject;
 
@@ -12,6 +12,6 @@ public interface TokenCallback {
 
     void onSuccess(JSONObject token);
 
-    void onError(VolleyError error);
+    void onError(Error error);
 
 }

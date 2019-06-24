@@ -1,20 +1,13 @@
-package com.culqilib;
+package com.culqilib.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by culqi on 2/7/17.
  */
 
-public class Card implements Serializable {
-
-    public Card(String card_number, String cvv, int expiration_month, int expiration_year, String email) {
-        this.card_number = card_number;
-        this.cvv = cvv;
-        this.expiration_month = expiration_month;
-        this.expiration_year = expiration_year;
-        this.email = email;
-    }
+public class Card implements Parcelable {
 
     private String card_number;
 
@@ -25,6 +18,48 @@ public class Card implements Serializable {
     private int expiration_year;
 
     private String email;
+
+    public Card(String card_number, String cvv, int expiration_month, int expiration_year, String email) {
+        this.card_number = card_number;
+        this.cvv = cvv;
+        this.expiration_month = expiration_month;
+        this.expiration_year = expiration_year;
+        this.email = email;
+    }
+
+    private Card(Parcel in) {
+        card_number = in.readString();
+        cvv = in.readString();
+        expiration_month = in.readInt();
+        expiration_year = in.readInt();
+        email = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(card_number);
+        dest.writeString(cvv);
+        dest.writeInt(expiration_month);
+        dest.writeInt(expiration_year);
+        dest.writeString(email);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
+        @Override
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
+        }
+
+        @Override
+        public Card[] newArray(int size) {
+            return new Card[size];
+        }
+    };
 
     public String getCard_number() {
         return card_number;
@@ -64,16 +99,5 @@ public class Card implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Card{" +
-                "card_number='" + card_number + '\'' +
-                ", cvv='" + cvv + '\'' +
-                ", expiration_month=" + expiration_month +
-                ", expiration_year=" + expiration_year +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

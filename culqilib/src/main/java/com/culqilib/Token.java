@@ -10,13 +10,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.culqilib.listener.TokenCallback;
+import com.culqilib.model.Card;
+import com.culqilib.model.Error;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by culqi on 1/19/17.
@@ -60,7 +65,20 @@ public class Token {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(error);
+                Error error1;
+                JSONObject jsonObject;
+                try {
+                    jsonObject = new JSONObject(new String(error.networkResponse.data, StandardCharsets.UTF_8));
+                    error1 = new Error(Objects.requireNonNull(jsonObject).get("code").toString(),
+                            Objects.requireNonNull(jsonObject).get("merchant_message").toString(),
+                            Objects.requireNonNull(jsonObject).get("user_message").toString(),
+                            Objects.requireNonNull(jsonObject).get("type").toString(),
+                            Objects.requireNonNull(jsonObject).get("param").toString(),
+                            Objects.requireNonNull(jsonObject).get("object").toString());
+                } catch (JSONException e) {
+                    error1 = new Error();
+                }
+                listener.onError(error1);
             }
         }) {
             @Override
