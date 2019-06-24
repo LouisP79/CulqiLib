@@ -3,7 +3,7 @@ package com.culqilib
 import android.util.Log
 import com.culqilib.listener.TokenCallback
 import com.culqilib.model.*
-import com.culqilib.model.Token
+import com.culqilib.model.TokenSuccess
 import com.culqilib.restServices.TokenService
 import com.culqilib.restServices.deserializer.TokenDeserializer
 
@@ -33,7 +33,7 @@ class Token(private var apiKey: String) {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if(response.isSuccessful){
                     val jsonResponse = JSONObject(response.body()!!.string())
-                    val token = Token(jsonResponse.get("object").toString(),
+                    val tokenSuccess = TokenSuccess(jsonResponse.get("object").toString(),
                             jsonResponse.get("id").toString(),
                             jsonResponse.get("type").toString(),
                             jsonResponse.get("creation_date").toString().toLong(),
@@ -49,7 +49,7 @@ class Token(private var apiKey: String) {
                                     Issuer(jsonResponse.getJSONObject("iin").getJSONObject("issuer").get("name").toString(),
                                             jsonResponse.getJSONObject("iin").getJSONObject("issuer").get("country").toString(),
                                             jsonResponse.getJSONObject("iin").getJSONObject("issuer").get("country_code").toString())))
-                    listener.onSuccess(token)
+                    listener.onSuccess(tokenSuccess)
                 }else{
                     val jsonResponse = JSONObject(response.errorBody()!!.string())
                     val tokenError = TokenError(jsonResponse.get("merchant_message").toString(),

@@ -6,15 +6,15 @@ import android.os.Parcelable
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
  */
-data class Token(val objectToken: String,
-            val id: String,
-            val type: String,
-            val creationDate: Long,
-            val email: String,
-            val cardNumber: String,
-            val lastFour: String,
-            val active: Boolean,
-            val iin: Iin): Parcelable {
+data class TokenSuccess(val objectToken: String,
+                        val id: String,
+                        val type: String,
+                        val creationDate: Long,
+                        val email: String,
+                        val cardNumber: String,
+                        val lastFour: String,
+                        val active: Boolean,
+                        val iin: Iin): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
@@ -43,12 +43,12 @@ data class Token(val objectToken: String,
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Token> {
-        override fun createFromParcel(parcel: Parcel): Token {
-            return Token(parcel)
+    companion object CREATOR : Parcelable.Creator<TokenSuccess> {
+        override fun createFromParcel(parcel: Parcel): TokenSuccess {
+            return TokenSuccess(parcel)
         }
 
-        override fun newArray(size: Int): Array<Token?> {
+        override fun newArray(size: Int): Array<TokenSuccess?> {
             return arrayOfNulls(size)
         }
     }

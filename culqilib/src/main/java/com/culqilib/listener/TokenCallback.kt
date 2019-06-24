@@ -1,7 +1,7 @@
 package com.culqilib.listener
 
 
-import com.culqilib.model.Token
+import com.culqilib.model.TokenSuccess
 import com.culqilib.model.TokenError
 
 /**
@@ -9,7 +9,7 @@ import com.culqilib.model.TokenError
  */
 interface TokenCallback {
 
-    fun onSuccess(token: Token)
+    fun onSuccess(token: TokenSuccess)
 
     fun onError(tokenError: TokenError)
 

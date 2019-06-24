@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         val token = Token("pk_test_Jf2vS2zIlimqIgm8")
         token.createToken(card, object : TokenCallback {
-            override fun onSuccess(token: com.culqilib.model.Token) {
+            override fun onSuccess(token: com.culqilib.model.TokenSuccess) {
                 textView.text = token.id
 
                 textView.visibility = View.VISIBLE
