@@ -17,14 +17,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Token("pk_test_Jf2vS2zIlimqIgm8")
-                .createToken(
-                        TokenDeserializer.CardRequest(cardNumber="4111111111111111",
-                        cvv="123",
-                        expirationMonth=9,
-                        expirationYear=2020,
-                        email="annonimo79@gmail.com"),
-                        object : TokenCallback {
+        val card = TokenDeserializer.CardRequest(cardNumber="4111111111111111",
+                                                    cvv="123",
+                                                    expirationMonth=9,
+                                                    expirationYear=2020,
+                                                    email="annonimo79@gmail.com")
+
+        val token = Token("pk_test_Jf2vS2zIlimqIgm8")
+        token.createToken(card, object : TokenCallback {
             override fun onSuccess(token: com.culqilib.model.Token) {
                 textView.text = token.id
 
