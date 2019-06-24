@@ -2,6 +2,7 @@ package com.culqi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.culqilib.model.Card;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(Error error) {
                 textView.setText(error.getUserMessage());
+                Log.e("Code",error.getCode());
+                Log.e("MerchantMessage",error.getMerchantMessage());
+                Log.e("Object",error.getObject());
+                Log.e("Param",error.getParam());
+                Log.e("Type",error.getType());
             }
         });
     }

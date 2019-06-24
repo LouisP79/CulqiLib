@@ -45,22 +45,13 @@ token.createToken(getApplicationContext(), card, new TokenCallback() {
     }
 
     @Override
-    public void onError(VolleyError error) {
-        try {
-            JSONObject jsonObject = null;
-            try {
-                jsonObject = new JSONObject(new String(error.networkResponse.data,"UTF-8"));
-            } catch (JSONException e) {
-                textView.setText(e.getMessage());
-            }
-            try {
-                textView.setText(Objects.requireNonNull(jsonObject).get("user_message").toString());
-            } catch (JSONException e) {
-                textView.setText(e.getMessage());
-            }
-        } catch (UnsupportedEncodingException e) {
-            textView.setText(e.getMessage());
-        }
+    public void onError(Error error) {
+        Log.e("UserMessage",error.getUserMessage()));
+        Log.e("Code",error.getCode());
+        Log.e("MerchantMessage",error.getMerchantMessage());
+        Log.e("Object",error.getObject());
+        Log.e("Param",error.getParam());
+        Log.e("Type",error.getType());
     }
 });
 ```
@@ -117,14 +108,111 @@ token.createToken(getApplicationContext(), card, new TokenCallback() {
 ```
 
 
-#### Respuesta del método onError(VolleyError error) dentro de error.networkResponse.data
-```json
-{
-    "object": "error",
-    "type": "parameter_error",
-    "code": "invalid_number",
-    "merchant_message": "El número de la tarjeta no es un número de tarjeta de crédito o débito válido. Tiene que ser numérico de 13 a 16 digitos.",
-    "user_message": "El numero de tarjeta de crédito o débito brindado no es válido.",
-    "param": "card_number"
+#### Respuesta del método onError(Error error)
+```java
+public class Error implements Parcelable {
+
+    private String code;
+    private String merchantMessage;
+    private String userMessage;
+    private String type;
+    private String param;
+    private String object;
+
+    public Error() {
+    }
+
+    public Error(String code, String merchantMessage, String userMessage, String type, String param, String object) {
+        this.code = code;
+        this.merchantMessage = merchantMessage;
+        this.userMessage = userMessage;
+        this.type = type;
+        this.param = param;
+        this.object = object;
+    }
+
+    private Error(Parcel in) {
+        code = in.readString();
+        merchantMessage = in.readString();
+        userMessage = in.readString();
+        type = in.readString();
+        param = in.readString();
+        object = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(code);
+        dest.writeString(merchantMessage);
+        dest.writeString(userMessage);
+        dest.writeString(type);
+        dest.writeString(param);
+        dest.writeString(object);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Error> CREATOR = new Creator<Error>() {
+        @Override
+        public Error createFromParcel(Parcel in) {
+            return new Error(in);
+        }
+
+        @Override
+        public Error[] newArray(int size) {
+            return new Error[size];
+        }
+    };
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMerchantMessage() {
+        return merchantMessage;
+    }
+
+    public void setMerchantMessage(String merchantMessage) {
+        this.merchantMessage = merchantMessage;
+    }
+
+    public String getUserMessage() {
+        return userMessage;
+    }
+
+    public void setUserMessage(String userMessage) {
+        this.userMessage = userMessage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
 }
 ```
