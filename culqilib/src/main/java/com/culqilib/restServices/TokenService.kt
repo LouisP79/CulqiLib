@@ -1,8 +1,9 @@
 package com.culqilib.restServices
 
 import com.culqilib.restServices.deserializer.TokenDeserializer
+import io.reactivex.Observable
 import okhttp3.ResponseBody
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -14,6 +15,6 @@ interface TokenService {
 
     @POST("/v2/tokens/")
     fun token(@Header("Authorization") culqiKey: String,
-            @Body request:TokenDeserializer.CardRequest): Call<ResponseBody>
+            @Body request:TokenDeserializer.CardRequest): Observable<Response<ResponseBody>>
 
 }
