@@ -34,8 +34,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onError(tokenError: TokenError) {
-                textView.text = tokenError.userMessage
+                textView.text = if (tokenError.userMessage.isNotEmpty()) tokenError.userMessage else tokenError.merchantMessage
                 Log.e("MerchantMessage", tokenError.merchantMessage)
+                Log.e("UserMessage", tokenError.userMessage)
                 Log.e("Type", tokenError.type)
 
                 textView.visibility = View.VISIBLE

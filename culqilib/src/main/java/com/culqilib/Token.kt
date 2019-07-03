@@ -30,12 +30,12 @@ class Token(private var apiKey: String) {
                 .token("Bearer $apiKey",card)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy (
-                    onError = { Log.e("CULQI ERROR", it.message) },
-                    onComplete = { println("onComplete!") },
+                .subscribeBy(
                         onNext = {  if(it.isSuccessful) listener.onSuccess(it.body()!!.successResponse())
-                                    else listener.onError(it.body()!!.errorResponse())
-                                  }
+                                    else listener.onError(it.errorBody()!!.errorResponse())
+                                  },
+                        onError = { it.printStackTrace() },
+                        onComplete = { println("onComplete!") }
                 )
     }
 }

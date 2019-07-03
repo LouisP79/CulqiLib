@@ -29,8 +29,13 @@ fun ResponseBody.successResponse(): TokenSuccess {
 
 fun ResponseBody.errorResponse(): TokenError {
     val jsonResponse = JSONObject(string())
-    return TokenError(jsonResponse.get("merchant_message").toString(),
-            jsonResponse.get("user_message").toString(),
-            jsonResponse.get("type").toString())
+    return try {
+        TokenError(jsonResponse.get("merchant_message").toString(),
+                jsonResponse.get("type").toString(),
+                jsonResponse.get("user_message").toString())
 
+    }catch (e: Exception){
+        TokenError(jsonResponse.get("merchant_message").toString(),
+                jsonResponse.get("type").toString())
+    }
 }
