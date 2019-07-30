@@ -1,6 +1,5 @@
 package com.culqilib
 
-import android.util.Log
 import com.culqilib.extensions.errorResponse
 import com.culqilib.extensions.successResponse
 import com.culqilib.listener.TokenCallback
