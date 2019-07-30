@@ -33,8 +33,7 @@ class Token(private var apiKey: String) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {  if(it.isSuccessful) listener.onSuccess(it.body()!!.successResponse())
-                                    else listener.onError(it.errorBody()!!.errorResponse())
-                                  },
+                                    else listener.onError(it.errorBody()!!.errorResponse())},
                         onError = { it.printStackTrace() },
                         onComplete = { println("onComplete!") }
                 )
