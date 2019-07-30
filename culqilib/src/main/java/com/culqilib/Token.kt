@@ -1,6 +1,6 @@
 package com.culqilib
 
-import android.util.Log
+import android.annotation.SuppressLint
 import com.culqilib.extensions.errorResponse
 import com.culqilib.extensions.successResponse
 import com.culqilib.listener.TokenCallback
@@ -19,6 +19,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
  */
 class Token(private var apiKey: String) {
 
+    @SuppressLint("CheckResult")
     fun createToken(card: TokenDeserializer.CardRequest, listener: TokenCallback){
         val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("https://secure.culqi.com")
