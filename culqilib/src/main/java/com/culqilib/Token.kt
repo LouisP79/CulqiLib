@@ -29,7 +29,7 @@ class Token(private var apiKey: String) {
 
         retrofit.create(TokenService::class.java)
                 .token("Bearer $apiKey",card)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {  if(it.isSuccessful) listener.onSuccess(it.body()!!.successResponse())
