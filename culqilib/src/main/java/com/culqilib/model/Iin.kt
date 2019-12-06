@@ -12,7 +12,7 @@ data class Iin(val objectIin: String,
           val cardType: String,
           val cardCategory: String,
           val issuer: Issuer,
-          val installments_allowed: List<Int>): Parcelable {
+          val installmentsAllowed: List<Int>): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
@@ -30,7 +30,7 @@ data class Iin(val objectIin: String,
         parcel.writeString(cardType)
         parcel.writeString(cardCategory)
         parcel.writeParcelable(issuer, flags)
-        parcel.writeIntArray(installments_allowed.toIntArray())
+        parcel.writeIntArray(installmentsAllowed.toIntArray())
     }
 
     override fun describeContents(): Int {
