@@ -18,7 +18,7 @@ allprojects {
 ```
 #### build.gradle (Module:app)
 ```gradle
-  implementation 'com.github.LouisP79:CulqiLib:v3.6'
+  implementation 'com.github.LouisP79:CulqiLib:v3.8'
 ```
 
 #### Uso
