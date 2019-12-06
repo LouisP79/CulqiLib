@@ -11,7 +11,8 @@ data class Iin(val objectIin: String,
           val cardBrand: String,
           val cardType: String,
           val cardCategory: String,
-          val issuer: Issuer): Parcelable {
+          val issuer: Issuer,
+          val installments_allowed: List<Int>): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
@@ -19,7 +20,8 @@ data class Iin(val objectIin: String,
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!,
-            parcel.readParcelable(Issuer::class.java.classLoader)!!)
+            parcel.readParcelable(Issuer::class.java.classLoader)!!,
+            parcel.createIntArray()!!.toList())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(objectIin)
@@ -28,6 +30,7 @@ data class Iin(val objectIin: String,
         parcel.writeString(cardType)
         parcel.writeString(cardCategory)
         parcel.writeParcelable(issuer, flags)
+        parcel.writeIntArray(installments_allowed.toIntArray())
     }
 
     override fun describeContents(): Int {

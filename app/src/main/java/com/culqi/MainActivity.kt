@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
             override fun onSuccess(token: TokenSuccess) {
                 textView.text = token.id
 
+                Log.e("Token", token.toString())
+
                 textView.visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
             }
