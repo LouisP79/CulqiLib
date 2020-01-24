@@ -49,3 +49,9 @@ fun ResponseBody.errorResponse(): TokenError {
                 jsonResponse.get("type").toString())
     }
 }
+
+fun exception(message: String): TokenError{
+    return TokenError(message,
+            "Exception",
+            message)
+}

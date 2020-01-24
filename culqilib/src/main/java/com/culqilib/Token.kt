@@ -2,6 +2,7 @@ package com.culqilib
 
 import com.culqilib.extensions.errorResponse
 import com.culqilib.extensions.successResponse
+import com.culqilib.extensions.exception
 import com.culqilib.listener.TokenCallback
 import com.culqilib.restServices.TokenService
 import com.culqilib.restServices.deserializer.TokenDeserializer
@@ -35,12 +36,18 @@ class Token(private var apiKey: String) {
                 .client(okHttpClient)
                 .build()
 
+
         retrofit.create(TokenService::class.java)
-                .token("Bearer $apiKey",card)
-                .enqueue(object: Callback<ResponseBody>{
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {t.printStackTrace()}
+                .token("Bearer $apiKey", card)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        if(t.message!=null)
+                            listener.onError(exception(t.message!!))
+                        else listener.onError(exception("Unknown Message"))
+                    }
+
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        if(response.isSuccessful) listener.onSuccess(response.body()!!.successResponse())
+                        if (response.isSuccessful) listener.onSuccess(response.body()!!.successResponse())
                         else listener.onError(response.errorBody()!!.errorResponse())
                     }
                 })
