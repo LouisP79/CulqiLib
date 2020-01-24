@@ -5,6 +5,7 @@ import com.culqilib.extensions.successResponse
 import com.culqilib.listener.TokenCallback
 import com.culqilib.restServices.TokenService
 import com.culqilib.restServices.deserializer.TokenDeserializer
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,6 +14,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
@@ -21,10 +23,16 @@ class Token(private var apiKey: String) {
 
 
     fun createToken(card: TokenDeserializer.CardRequest, listener: TokenCallback){
-        val retrofit: Retrofit = Retrofit.Builder()
+        val okHttpClient = OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build()
+
+        val retrofit = Retrofit.Builder()
                 .baseUrl("https://secure.culqi.com")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
                 .build()
 
         retrofit.create(TokenService::class.java)
