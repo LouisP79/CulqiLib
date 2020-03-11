@@ -13,7 +13,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +31,6 @@ class Token(private var apiKey: String) {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://secure.culqi.com")
                 .addConverterFactory(JacksonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
 

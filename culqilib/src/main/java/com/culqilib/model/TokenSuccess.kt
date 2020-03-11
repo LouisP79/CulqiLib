@@ -6,15 +6,15 @@ import android.os.Parcelable
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
  */
-data class TokenSuccess(val objectToken: String,
-                        val id: String,
-                        val type: String,
-                        val creationDate: Long,
-                        val email: String,
-                        val cardNumber: String,
-                        val lastFour: String,
-                        val active: Boolean,
-                        val iin: Iin): Parcelable {
+data class TokenSuccess(val objectToken: String = "",
+                        val id: String = "",
+                        val type: String = "",
+                        val creationDate: Long = 0,
+                        val email: String = "",
+                        val cardNumber: String = "",
+                        val lastFour: String = "",
+                        val active: Boolean = false,
+                        val iin: Iin = Iin()): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,

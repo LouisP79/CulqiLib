@@ -6,13 +6,13 @@ import android.os.Parcelable
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
  */
-data class Iin(val objectIin: String,
-          val bin: String,
-          val cardBrand: String,
-          val cardType: String,
-          val cardCategory: String,
-          val issuer: Issuer,
-          val installmentsAllowed: List<Int>): Parcelable {
+data class Iin(val objectIin: String = "",
+          val bin: String = "",
+          val cardBrand: String = "",
+          val cardType: String = "",
+          val cardCategory: String = "",
+          val issuer: Issuer = Issuer(),
+          val installmentsAllowed: List<Int> = listOf()): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,

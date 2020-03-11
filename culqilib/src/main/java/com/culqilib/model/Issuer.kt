@@ -6,9 +6,9 @@ import android.os.Parcelable
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
  */
-data class Issuer (val name: String,
-              val country: String,
-              val countryCode: String): Parcelable {
+data class Issuer (val name: String = "",
+              val country: String = "",
+              val countryCode: String = ""): Parcelable {
 
 
     constructor(parcel: Parcel) : this(

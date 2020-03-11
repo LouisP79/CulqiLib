@@ -6,8 +6,8 @@ import android.os.Parcelable
 /**
  * Created by Louis Perdomo -> louis.perdomo79@gmail.com on 24/06/2019.
  */
-data class TokenError(val merchantMessage: String,
-                      val type: String,
+data class TokenError(val merchantMessage: String = "",
+                      val type: String = "",
                       val userMessage: String = ""): Parcelable {
 
     constructor(parcel: Parcel) : this(
