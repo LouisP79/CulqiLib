@@ -78,3 +78,11 @@ data class TokenError(val merchantMessage: String,
                  val userMessage: String,
                  val type: String)
 ```
+
+#### Proguard Rules
+```
+# # -------------------------------------------
+# #  ############### CulqiLib ###############
+# # -------------------------------------------
+-keep class com.culqilib.** { *; }
+```
