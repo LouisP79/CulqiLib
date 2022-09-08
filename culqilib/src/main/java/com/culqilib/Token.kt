@@ -46,7 +46,18 @@ class Token(private var apiKey: String) {
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if (response.isSuccessful) listener.onSuccess(response.body()!!.successResponse())
-                        else listener.onError(response.errorBody()!!.errorResponse())
+                        else{
+                            when(response.code()){
+                                400 -> {listener.onError(exception("Culqi Store Token Error"))}
+                                else -> {
+                                    if(response.errorBody()?.errorResponse() != null){
+                                        listener.onError(response.errorBody()!!.errorResponse())
+                                    }else{
+                                        listener.onError(exception("Unknown Message"))
+                                    }
+                                }
+                            }
+                        }
                     }
                 })
     }
