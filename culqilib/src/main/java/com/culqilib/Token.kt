@@ -49,6 +49,7 @@ class Token(private var apiKey: String) {
                         else{
                             when(response.code()){
                                 400 -> {listener.onError(exception("Culqi Store Token Error"))}
+                                401 -> {listener.onError(exception("Culqi Token Unauthorized"))}
                                 else -> {
                                     if(response.errorBody()?.errorResponse() != null){
                                         listener.onError(response.errorBody()!!.errorResponse())
